@@ -1,0 +1,308 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "AppStreamRevitStack": {
+        "id": "AppStreamRevitStack",
+        "path": "AppStreamRevitStack",
+        "children": {
+          "PersistentStorageBucket": {
+            "id": "PersistentStorageBucket",
+            "path": "AppStreamRevitStack/PersistentStorageBucket",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "AppStreamRevitStack/PersistentStorageBucket/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                  "aws:cdk:cloudformation:props": {}
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                  "version": "2.178.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_s3.Bucket",
+              "version": "2.178.1",
+              "metadata": []
+            }
+          },
+          "AppStreamFleetRole": {
+            "id": "AppStreamFleetRole",
+            "path": "AppStreamRevitStack/AppStreamFleetRole",
+            "children": {
+              "ImportAppStreamFleetRole": {
+                "id": "ImportAppStreamFleetRole",
+                "path": "AppStreamRevitStack/AppStreamFleetRole/ImportAppStreamFleetRole",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.178.1",
+                  "metadata": []
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "AppStreamRevitStack/AppStreamFleetRole/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                  "aws:cdk:cloudformation:props": {
+                    "assumeRolePolicyDocument": {
+                      "Statement": [
+                        {
+                          "Action": "sts:AssumeRole",
+                          "Effect": "Allow",
+                          "Principal": {
+                            "Service": "appstream.amazonaws.com"
+                          }
+                        }
+                      ],
+                      "Version": "2012-10-17"
+                    },
+                    "description": "IAM role for AppStream fleet instances to access persistent storage"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                  "version": "2.178.1"
+                }
+              },
+              "DefaultPolicy": {
+                "id": "DefaultPolicy",
+                "path": "AppStreamRevitStack/AppStreamFleetRole/DefaultPolicy",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "AppStreamRevitStack/AppStreamFleetRole/DefaultPolicy/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                      "aws:cdk:cloudformation:props": {
+                        "policyDocument": {
+                          "Statement": [
+                            {
+                              "Action": [
+                                "s3:GetObject*",
+                                "s3:GetBucket*",
+                                "s3:List*",
+                                "s3:DeleteObject*",
+                                "s3:PutObject",
+                                "s3:PutObjectLegalHold",
+                                "s3:PutObjectRetention",
+                                "s3:PutObjectTagging",
+                                "s3:PutObjectVersionTagging",
+                                "s3:Abort*"
+                              ],
+                              "Effect": "Allow",
+                              "Resource": [
+                                {
+                                  "Fn::GetAtt": [
+                                    "PersistentStorageBucketC38960A4",
+                                    "Arn"
+                                  ]
+                                },
+                                {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      {
+                                        "Fn::GetAtt": [
+                                          "PersistentStorageBucketC38960A4",
+                                          "Arn"
+                                        ]
+                                      },
+                                      "/*"
+                                    ]
+                                  ]
+                                }
+                              ]
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "policyName": "AppStreamFleetRoleDefaultPolicy0372B8E5",
+                        "roles": [
+                          {
+                            "Ref": "AppStreamFleetRole75D6353E"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                      "version": "2.178.1"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Policy",
+                  "version": "2.178.1",
+                  "metadata": []
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_iam.Role",
+              "version": "2.178.1",
+              "metadata": []
+            }
+          },
+          "RevitFleet": {
+            "id": "RevitFleet",
+            "path": "AppStreamRevitStack/RevitFleet",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::AppStream::Fleet",
+              "aws:cdk:cloudformation:props": {
+                "computeCapacity": {
+                  "desiredInstances": 2
+                },
+                "fleetType": "ON_DEMAND",
+                "iamRoleArn": {
+                  "Fn::GetAtt": [
+                    "AppStreamFleetRole75D6353E",
+                    "Arn"
+                  ]
+                },
+                "imageName": "MyRevitImage-2025-02",
+                "instanceType": "stream.standard.medium",
+                "name": "RevitFleet"
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_appstream.CfnFleet",
+              "version": "2.178.1"
+            }
+          },
+          "RevitStack": {
+            "id": "RevitStack",
+            "path": "AppStreamRevitStack/RevitStack",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::AppStream::Stack",
+              "aws:cdk:cloudformation:props": {
+                "name": "RevitStack",
+                "storageConnectors": [
+                  {
+                    "connectorType": "HOMEFOLDERS"
+                  }
+                ],
+                "userSettings": [
+                  {
+                    "action": "CLIPBOARD_COPY_FROM_LOCAL_DEVICE",
+                    "permission": "DISABLE"
+                  },
+                  {
+                    "action": "CLIPBOARD_COPY_TO_LOCAL_DEVICE",
+                    "permission": "DISABLE"
+                  },
+                  {
+                    "action": "FILE_UPLOAD",
+                    "permission": "DISABLE"
+                  },
+                  {
+                    "action": "FILE_DOWNLOAD",
+                    "permission": "DISABLE"
+                  }
+                ]
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_appstream.CfnStack",
+              "version": "2.178.1"
+            }
+          },
+          "RevitStackFleetAssociation": {
+            "id": "RevitStackFleetAssociation",
+            "path": "AppStreamRevitStack/RevitStackFleetAssociation",
+            "attributes": {
+              "aws:cdk:cloudformation:type": "AWS::AppStream::StackFleetAssociation",
+              "aws:cdk:cloudformation:props": {
+                "fleetName": "RevitFleet",
+                "stackName": "RevitStack"
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_appstream.CfnStackFleetAssociation",
+              "version": "2.178.1"
+            }
+          },
+          "PersistentStorageBucketName": {
+            "id": "PersistentStorageBucketName",
+            "path": "AppStreamRevitStack/PersistentStorageBucketName",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.178.1"
+            }
+          },
+          "AppStreamFleetRoleArn": {
+            "id": "AppStreamFleetRoleArn",
+            "path": "AppStreamRevitStack/AppStreamFleetRoleArn",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.178.1"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "AppStreamRevitStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "AppStreamRevitStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.178.1"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "AppStreamRevitStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.178.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.4.2"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "AppStreamRevitStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.178.1"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "AppStreamRevitStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.178.1"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.178.1"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.4.2"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.178.1"
+    }
+  }
+}

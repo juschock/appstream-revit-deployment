@@ -1,0 +1,119 @@
+{
+  "version": "39.0.0",
+  "artifacts": {
+    "AppStreamRevitStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "AppStreamRevitStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "AppStreamRevitStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "AppStreamRevitStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1357dfd1d0ec2b9ea57fbc1488ed8587df71ee77f232451a37828936f65c0702.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "AppStreamRevitStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "AppStreamRevitStack.assets"
+      ],
+      "metadata": {
+        "/AppStreamRevitStack/PersistentStorageBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PersistentStorageBucketC38960A4"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamFleetRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamFleetRole75D6353E"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamFleetRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamFleetRoleDefaultPolicy0372B8E5"
+          }
+        ],
+        "/AppStreamRevitStack/RevitFleet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RevitFleet"
+          }
+        ],
+        "/AppStreamRevitStack/RevitStack": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RevitStack"
+          }
+        ],
+        "/AppStreamRevitStack/RevitStackFleetAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "RevitStackFleetAssociation"
+          }
+        ],
+        "/AppStreamRevitStack/PersistentStorageBucketName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PersistentStorageBucketName"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamFleetRoleArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamFleetRoleArn"
+          }
+        ],
+        "/AppStreamRevitStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/AppStreamRevitStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/AppStreamRevitStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/AppStreamRevitStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "AppStreamRevitStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}
