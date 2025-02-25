@@ -1,53 +1,22 @@
-README
+### Configuration
+This CDK script deploys an AWS AppStream fleet and stack using an existing custom image ARN. 
+Before deploying, ensure you update the configuration in `cdk.json`.
 
-Project Overview 
+1. Modify `cdk.json`  
+   - Replace `"imageArn": "arn:aws:appstream:ap-southeast-1:995640967788:image/OBD-Revit-AutoCAD"` with your own AppStream image ARN.
 
-This project uses the AWS Cloud Development Kit (CDK) written in TypeScript to deploy AWS AppStream resources. 
-The code creates an AppStream fleet and an AppStream stack. 
-It deploys multiple AppStream instances, with the number of instances adjustable through a context parameter. 
-The fleet uses a custom image (not included in this repo) that should include Autodesk Revit. 
-An Amazon S3 bucket is created and mounted as persistent storage using the AppStream Home Folders feature. 
-User settings in the stack disable clipboard operations and file transfers between the AppStream session and the local desktop to prevent data exfiltration.
+2. Deploy the CDK Stack  
+   - Install dependencies:  
+     ```bash
+     npm install
+     ```
+   - Run CDK bootstrap (if this is your first deployment):  
+     ```bash
+     cdk bootstrap
+     ```
+   - Deploy the stack with the specified image ARN:  
+     ```bash
+     ./scripts/deploy.sh
+     ```
 
-Installation and Setup
-
-Ensure Node.js (version 14 or later) and npm are installed.
-Install the AWS CLI and configure your AWS credentials. 
-The AWS keys and credentials are not included in this project and must be set up on your machine.
-Install the AWS CDK globally by running the command: 
-npm install -g aws-cdk.
-Obtain the project source code by cloning the repository or extracting the provided ZIP file.
-In the project root directory, run npm install to install the required dependencies.
-The project directory contains the following components:
-bin folder: Contains the entry point file appstream.ts, which initializes the CDK app and instantiates the AppStream stack.
-lib folder: Contains the file appstream-stack.ts, which defines the AWS resources, including the AppStream fleet, AppStream stack, IAM roles, and S3 bucket.
-scripts folder: Contains the deploy.sh script for bootstrapping and deploying the stack.
-cdk.json: Contains context parameters such as desiredInstances, imageName, and fleetInstanceType.
-tsconfig.json and package.json: Provide the TypeScript and project configuration.
-Placeholders and Client Adjustments
-
-AWS Credentials: The project does not include AWS keys. The client must ensure that AWS CLI is configured with the correct credentials.
-Custom Image: The imageName parameter in cdk.json is set to "MyRevitImage-2025-02". This is a placeholder for the custom AppStream image that includes Autodesk Revit. The client is expected to supply the appropriate custom image.
-Instance Parameters: The number of AppStream instances (desiredInstances) and the fleet instance type (fleetInstanceType) are configurable. These can be adjusted in cdk.json or overridden during deployment using context parameters.
-Environment Settings: The AWS account and region settings are not hardcoded in the project. The client should ensure that the environment is configured via the AWS CLI or by uncommenting the relevant lines in the bin/appstream.ts file.
-Running the Project
-
-Build the project by running the command: 
-npm run build.
-Generate the CloudFormation template by running: 
-cdk synth.
-Bootstrap the CDK environment if it has not been bootstrapped before by running: cdk bootstrap.
-Deploy the stack by running: 
-cdk deploy. 
-
-Alternatively, you can use the provided deployment script by running: 
-./scripts/deploy.sh.
-Follow the prompts during deployment to approve resource creation.
-After deployment, verify the created resources in the AWS Management Console. 
-Check CloudFormation for the stack, AppStream for the fleet and stack, and S3 for the persistent storage bucket.
-Ensure the stack behaves as expected. 
-
-Troubleshooting
-
-If you encounter issues, check the AWS CloudFormation stack for detailed error messages and address accordingly.
-
+Once deployed, the AppStream fleet and stack will be available in AWS. You can manage them via the AWS Console or CLI.

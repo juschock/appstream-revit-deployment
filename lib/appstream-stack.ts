@@ -9,8 +9,12 @@ export class AppStreamStack extends cdk.Stack {
     super(scope, id, props);
 
     const desiredInstances = Number(this.node.tryGetContext('desiredInstances')) || 2;
-    const imageName = this.node.tryGetContext('imageName') || 'MyRevitImage-2025-02';
+    const imageArn = this.node.tryGetContext('imageArn');
     const fleetInstanceType = this.node.tryGetContext('fleetInstanceType') || 'stream.standard.medium';
+
+    if (!imageArn) {
+      throw new Error("Error: You must provide an AppStream image ARN in cdk.json");
+    }
 
     const persistentStorageBucket = new s3.Bucket(this, 'PersistentStorageBucket', {
       removalPolicy: cdk.RemovalPolicy.RETAIN,
@@ -27,7 +31,7 @@ export class AppStreamStack extends cdk.Stack {
     const appStreamFleet = new appstream.CfnFleet(this, 'RevitFleet', {
       name: 'RevitFleet',
       instanceType: fleetInstanceType,
-      imageName: imageName,
+      imageArn: imageArn,
       computeCapacity: {
         desiredInstances: desiredInstances
       },

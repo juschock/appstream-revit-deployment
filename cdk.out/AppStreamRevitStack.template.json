@@ -98,7 +98,7 @@
       "Arn"
      ]
     },
-    "ImageName": "MyRevitImage-2025-02",
+    "ImageArn": "arn:aws:appstream:region:account:image/MyRevitImage-2025-02",
     "InstanceType": "stream.standard.medium",
     "Name": "RevitFleet"
    },

@@ -2,7 +2,7 @@
   "app": "npx ts-node --prefer-ts-exts bin/appstream.ts",
   "context": {
     "desiredInstances": "2",
-    "imageName": "MyRevitImage-2025-02",
+    "imageArn": "arn:aws:appstream:ap-southeast-1:995640967788:image/OBD-Revit-AutoCAD",
     "fleetInstanceType": "stream.standard.medium"
   }
 }
