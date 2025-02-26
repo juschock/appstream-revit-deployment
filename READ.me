@@ -1,22 +1,52 @@
 ### Configuration
-This CDK script deploys an AWS AppStream fleet and stack using an existing custom image ARN. 
+This CDK script deploys an AWS AppStream fleet and stack using an existing custom image ARN.
 Before deploying, ensure you update the configuration in `cdk.json`.
 
-1. Modify `cdk.json`  
-   - Replace `"imageArn": "arn:aws:appstream:ap-southeast-1:995640967788:image/OBD-Revit-AutoCAD"` with your own AppStream image ARN.
+1. Modify `cdk.json`
+   - Replace the placeholder image ARN with your own AppStream image ARN:
+     ```json
+     {
+       "app": "npx ts-node --prefer-ts-exts bin/appstream.ts",
+       "context": {
+         "desiredInstances": "2",
+         "imageArn": "arn:aws:appstream:<your-region>:<your-account>:image/<your-image-name>",
+         "fleetInstanceType": "stream.standard.medium"
+       }
+     }
+     ```
+   - Ensure the ARN matches an existing AppStream image in your AWS account.
 
-2. Deploy the CDK Stack  
-   - Install dependencies:  
-     ```bash
-     npm install
-     ```
-   - Run CDK bootstrap (if this is your first deployment):  
-     ```bash
-     cdk bootstrap
-     ```
-   - Deploy the stack with the specified image ARN:  
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Run CDK bootstrap (only needed for first-time deployments):
+   ```bash
+   cdk bootstrap
+   ```
+
+4. Deploy the CDK stack:
+   - Run the following command from the project root:
      ```bash
      ./scripts/deploy.sh
      ```
+   - This will create the AppStream fleet and stack in your AWS account.
 
-Once deployed, the AppStream fleet and stack will be available in AWS. You can manage them via the AWS Console or CLI.
+### Verification & Management
+Once deployed, you can verify and manage the AppStream fleet and stack using the AWS Console or CLI:
+
+- Check Fleet Deployment Status:
+  ```bash
+  aws appstream describe-fleets --region <your-region>
+  ```
+- Check Stack Deployment Status:
+  ```bash
+  aws appstream describe-stacks --region <your-region>
+  ```
+- To delete the deployment if needed:
+  ```bash
+  cdk destroy
+  ```
+
+If you encounter any issues, check the AWS CloudFormation console for error messages related to the AppStreamRevitStack deployment.
