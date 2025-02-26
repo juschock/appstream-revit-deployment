@@ -44,19 +44,19 @@ export class AppStreamStack extends cdk.Stack {
       userSettings: [
         {
           action: 'CLIPBOARD_COPY_FROM_LOCAL_DEVICE',
-          permission: 'DISABLE'
+          permission: 'DISABLED'
         },
         {
           action: 'CLIPBOARD_COPY_TO_LOCAL_DEVICE',
-          permission: 'DISABLE'
+          permission: 'DISABLED'
         },
         {
           action: 'FILE_UPLOAD',
-          permission: 'DISABLE'
+          permission: 'DISABLED'
         },
         {
           action: 'FILE_DOWNLOAD',
-          permission: 'DISABLE'
+          permission: 'DISABLED'
         }
       ],
       storageConnectors: [
@@ -69,7 +69,7 @@ export class AppStreamStack extends cdk.Stack {
     new appstream.CfnStackFleetAssociation(this, 'RevitStackFleetAssociation', {
       fleetName: appStreamFleet.name!,
       stackName: appStreamStack.name!
-    });
+    }).addDependency(appStreamFleet);
 
     new cdk.CfnOutput(this, 'PersistentStorageBucketName', {
       value: persistentStorageBucket.bucketName,

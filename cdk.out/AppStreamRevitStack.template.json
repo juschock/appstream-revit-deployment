@@ -98,7 +98,7 @@
       "Arn"
      ]
     },
-    "ImageArn": "arn:aws:appstream:region:account:image/MyRevitImage-2025-02",
+    "ImageArn": "arn:aws:appstream:ap-southeast-1:995640967788:image/OBD-Revit-AutoCAD",
     "InstanceType": "stream.standard.medium",
     "Name": "RevitFleet"
    },
@@ -118,19 +118,19 @@
     "UserSettings": [
      {
       "Action": "CLIPBOARD_COPY_FROM_LOCAL_DEVICE",
-      "Permission": "DISABLE"
+      "Permission": "DISABLED"
      },
      {
       "Action": "CLIPBOARD_COPY_TO_LOCAL_DEVICE",
-      "Permission": "DISABLE"
+      "Permission": "DISABLED"
      },
      {
       "Action": "FILE_UPLOAD",
-      "Permission": "DISABLE"
+      "Permission": "DISABLED"
      },
      {
       "Action": "FILE_DOWNLOAD",
-      "Permission": "DISABLE"
+      "Permission": "DISABLED"
      }
     ]
    },
@@ -144,6 +144,9 @@
     "FleetName": "RevitFleet",
     "StackName": "RevitStack"
    },
+   "DependsOn": [
+    "RevitFleet"
+   ],
    "Metadata": {
     "aws:cdk:path": "AppStreamRevitStack/RevitStackFleetAssociation"
    }
@@ -151,7 +154,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zWMwQ6CMBBEv4V7WaUe5KokXjX4AaaWJVkoLWFbiWn67wYaT/NmMnkSqnMNVaFWLnU3lobeEJ9e6VGolV+RTxCvQY/oRdPbTEmQmiC2zuA27vlwhvR3q5mSUPPMfsHt2fT2ZjArsvsP+3xhdpqUJ2dTEi2yC4ve1ffg5+CTsK5DGPjwkUeoapDFwETlEqynCaHN+QPKXrP2ywAAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zWMwQqDMBBEv8V73Gp68doKvbbYDyhpjLAaE3E3lRLy70VDT/NmGJ6EuqmhKtRGpe6n0uIb4pOVnoTa6BXpDPEa9GRYtIPLlASqGWLnrdnHIx/eov7uNVMSalmIV7M/28HdrMmK7P7DMV+IvEbF6F1KojPkw6oP9T3wEjgJ53sDI50+soK6AVmMhFiuwTHOBrqcP3vL+SbLAAAA"
    },
    "Metadata": {
     "aws:cdk:path": "AppStreamRevitStack/CDKMetadata/Default"

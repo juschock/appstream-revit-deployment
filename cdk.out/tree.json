@@ -21,13 +21,13 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
-                  "version": "2.178.1"
+                  "version": "2.181.0"
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_s3.Bucket",
-              "version": "2.178.1",
+              "version": "2.181.0",
               "metadata": []
             }
           },
@@ -40,7 +40,7 @@
                 "path": "AppStreamRevitStack/AppStreamFleetRole/ImportAppStreamFleetRole",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.Resource",
-                  "version": "2.178.1",
+                  "version": "2.181.0",
                   "metadata": []
                 }
               },
@@ -67,7 +67,7 @@
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_iam.CfnRole",
-                  "version": "2.178.1"
+                  "version": "2.181.0"
                 }
               },
               "DefaultPolicy": {
@@ -132,20 +132,20 @@
                     },
                     "constructInfo": {
                       "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
-                      "version": "2.178.1"
+                      "version": "2.181.0"
                     }
                   }
                 },
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.aws_iam.Policy",
-                  "version": "2.178.1",
+                  "version": "2.181.0",
                   "metadata": []
                 }
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_iam.Role",
-              "version": "2.178.1",
+              "version": "2.181.0",
               "metadata": []
             }
           },
@@ -165,14 +165,14 @@
                     "Arn"
                   ]
                 },
-                "imageName": "MyRevitImage-2025-02",
+                "imageArn": "arn:aws:appstream:ap-southeast-1:995640967788:image/OBD-Revit-AutoCAD",
                 "instanceType": "stream.standard.medium",
                 "name": "RevitFleet"
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_appstream.CfnFleet",
-              "version": "2.178.1"
+              "version": "2.181.0"
             }
           },
           "RevitStack": {
@@ -190,26 +190,26 @@
                 "userSettings": [
                   {
                     "action": "CLIPBOARD_COPY_FROM_LOCAL_DEVICE",
-                    "permission": "DISABLE"
+                    "permission": "DISABLED"
                   },
                   {
                     "action": "CLIPBOARD_COPY_TO_LOCAL_DEVICE",
-                    "permission": "DISABLE"
+                    "permission": "DISABLED"
                   },
                   {
                     "action": "FILE_UPLOAD",
-                    "permission": "DISABLE"
+                    "permission": "DISABLED"
                   },
                   {
                     "action": "FILE_DOWNLOAD",
-                    "permission": "DISABLE"
+                    "permission": "DISABLED"
                   }
                 ]
               }
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_appstream.CfnStack",
-              "version": "2.178.1"
+              "version": "2.181.0"
             }
           },
           "RevitStackFleetAssociation": {
@@ -224,7 +224,7 @@
             },
             "constructInfo": {
               "fqn": "aws-cdk-lib.aws_appstream.CfnStackFleetAssociation",
-              "version": "2.178.1"
+              "version": "2.181.0"
             }
           },
           "PersistentStorageBucketName": {
@@ -232,7 +232,7 @@
             "path": "AppStreamRevitStack/PersistentStorageBucketName",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.178.1"
+              "version": "2.181.0"
             }
           },
           "AppStreamFleetRoleArn": {
@@ -240,7 +240,7 @@
             "path": "AppStreamRevitStack/AppStreamFleetRoleArn",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnOutput",
-              "version": "2.178.1"
+              "version": "2.181.0"
             }
           },
           "CDKMetadata": {
@@ -252,7 +252,7 @@
                 "path": "AppStreamRevitStack/CDKMetadata/Default",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnResource",
-                  "version": "2.178.1"
+                  "version": "2.181.0"
                 }
               },
               "Condition": {
@@ -260,7 +260,7 @@
                 "path": "AppStreamRevitStack/CDKMetadata/Condition",
                 "constructInfo": {
                   "fqn": "aws-cdk-lib.CfnCondition",
-                  "version": "2.178.1"
+                  "version": "2.181.0"
                 }
               }
             },
@@ -274,7 +274,7 @@
             "path": "AppStreamRevitStack/BootstrapVersion",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnParameter",
-              "version": "2.178.1"
+              "version": "2.181.0"
             }
           },
           "CheckBootstrapVersion": {
@@ -282,13 +282,13 @@
             "path": "AppStreamRevitStack/CheckBootstrapVersion",
             "constructInfo": {
               "fqn": "aws-cdk-lib.CfnRule",
-              "version": "2.178.1"
+              "version": "2.181.0"
             }
           }
         },
         "constructInfo": {
           "fqn": "aws-cdk-lib.Stack",
-          "version": "2.178.1"
+          "version": "2.181.0"
         }
       },
       "Tree": {
@@ -302,7 +302,7 @@
     },
     "constructInfo": {
       "fqn": "aws-cdk-lib.App",
-      "version": "2.178.1"
+      "version": "2.181.0"
     }
   }
 }
