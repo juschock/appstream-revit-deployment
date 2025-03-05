@@ -1,5 +1,423 @@
 {
  "Resources": {
+  "AppStreamVPC7F4B2A29": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "AppStreamRevitStack/AppStreamVPC"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/Resource"
+   }
+  },
+  "AppStreamVPCPublicSubnet1Subnet6540BBB4": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "AppStreamRevitStack/AppStreamVPC/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "AppStreamVPC7F4B2A29"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PublicSubnet1/Subnet"
+   }
+  },
+  "AppStreamVPCPublicSubnet1RouteTable59CFB7DC": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "AppStreamRevitStack/AppStreamVPC/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "AppStreamVPC7F4B2A29"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PublicSubnet1/RouteTable"
+   }
+  },
+  "AppStreamVPCPublicSubnet1RouteTableAssociationFD5E631A": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "AppStreamVPCPublicSubnet1RouteTable59CFB7DC"
+    },
+    "SubnetId": {
+     "Ref": "AppStreamVPCPublicSubnet1Subnet6540BBB4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "AppStreamVPCPublicSubnet1DefaultRoute11C0B031": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "AppStreamVPCIGW371CAD85"
+    },
+    "RouteTableId": {
+     "Ref": "AppStreamVPCPublicSubnet1RouteTable59CFB7DC"
+    }
+   },
+   "DependsOn": [
+    "AppStreamVPCVPCGW947385C3"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "AppStreamVPCPublicSubnet1EIP35A91E59": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "AppStreamRevitStack/AppStreamVPC/PublicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PublicSubnet1/EIP"
+   }
+  },
+  "AppStreamVPCPublicSubnet1NATGatewayD565B004": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "AppStreamVPCPublicSubnet1EIP35A91E59",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "AppStreamVPCPublicSubnet1Subnet6540BBB4"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "AppStreamRevitStack/AppStreamVPC/PublicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "AppStreamVPCPublicSubnet1DefaultRoute11C0B031",
+    "AppStreamVPCPublicSubnet1RouteTableAssociationFD5E631A"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PublicSubnet1/NATGateway"
+   }
+  },
+  "AppStreamVPCPublicSubnet2Subnet5EA61DC3": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.64.0/18",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "AppStreamRevitStack/AppStreamVPC/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "AppStreamVPC7F4B2A29"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PublicSubnet2/Subnet"
+   }
+  },
+  "AppStreamVPCPublicSubnet2RouteTable966B13BF": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "AppStreamRevitStack/AppStreamVPC/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "AppStreamVPC7F4B2A29"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PublicSubnet2/RouteTable"
+   }
+  },
+  "AppStreamVPCPublicSubnet2RouteTableAssociationC38F634B": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "AppStreamVPCPublicSubnet2RouteTable966B13BF"
+    },
+    "SubnetId": {
+     "Ref": "AppStreamVPCPublicSubnet2Subnet5EA61DC3"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "AppStreamVPCPublicSubnet2DefaultRouteE0DD11E4": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "AppStreamVPCIGW371CAD85"
+    },
+    "RouteTableId": {
+     "Ref": "AppStreamVPCPublicSubnet2RouteTable966B13BF"
+    }
+   },
+   "DependsOn": [
+    "AppStreamVPCVPCGW947385C3"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "AppStreamVPCPrivateSubnet1SubnetE4C27DD4": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.128.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "AppStreamRevitStack/AppStreamVPC/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "AppStreamVPC7F4B2A29"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PrivateSubnet1/Subnet"
+   }
+  },
+  "AppStreamVPCPrivateSubnet1RouteTable12D18701": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "AppStreamRevitStack/AppStreamVPC/PrivateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "AppStreamVPC7F4B2A29"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PrivateSubnet1/RouteTable"
+   }
+  },
+  "AppStreamVPCPrivateSubnet1RouteTableAssociationAF46A791": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "AppStreamVPCPrivateSubnet1RouteTable12D18701"
+    },
+    "SubnetId": {
+     "Ref": "AppStreamVPCPrivateSubnet1SubnetE4C27DD4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PrivateSubnet1/RouteTableAssociation"
+   }
+  },
+  "AppStreamVPCPrivateSubnet1DefaultRoute6DBA8702": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "AppStreamVPCPublicSubnet1NATGatewayD565B004"
+    },
+    "RouteTableId": {
+     "Ref": "AppStreamVPCPrivateSubnet1RouteTable12D18701"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PrivateSubnet1/DefaultRoute"
+   }
+  },
+  "AppStreamVPCPrivateSubnet2SubnetC678EC9D": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.192.0/18",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "AppStreamRevitStack/AppStreamVPC/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "AppStreamVPC7F4B2A29"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PrivateSubnet2/Subnet"
+   }
+  },
+  "AppStreamVPCPrivateSubnet2RouteTable2F8F00A0": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "AppStreamRevitStack/AppStreamVPC/PrivateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "AppStreamVPC7F4B2A29"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PrivateSubnet2/RouteTable"
+   }
+  },
+  "AppStreamVPCPrivateSubnet2RouteTableAssociationEAD7AC98": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "AppStreamVPCPrivateSubnet2RouteTable2F8F00A0"
+    },
+    "SubnetId": {
+     "Ref": "AppStreamVPCPrivateSubnet2SubnetC678EC9D"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PrivateSubnet2/RouteTableAssociation"
+   }
+  },
+  "AppStreamVPCPrivateSubnet2DefaultRouteDFE35ECC": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "AppStreamVPCPublicSubnet1NATGatewayD565B004"
+    },
+    "RouteTableId": {
+     "Ref": "AppStreamVPCPrivateSubnet2RouteTable2F8F00A0"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/PrivateSubnet2/DefaultRoute"
+   }
+  },
+  "AppStreamVPCIGW371CAD85": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "AppStreamRevitStack/AppStreamVPC"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/IGW"
+   }
+  },
+  "AppStreamVPCVPCGW947385C3": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "AppStreamVPCIGW371CAD85"
+    },
+    "VpcId": {
+     "Ref": "AppStreamVPC7F4B2A29"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "AppStreamRevitStack/AppStreamVPC/VPCGW"
+   }
+  },
   "PersistentStorageBucketC38960A4": {
    "Type": "AWS::S3::Bucket",
    "UpdateReplacePolicy": "Retain",
@@ -100,7 +518,17 @@
     },
     "ImageArn": "arn:aws:appstream:ap-southeast-1:995640967788:image/OBD-Revit-AutoCAD",
     "InstanceType": "stream.standard.medium",
-    "Name": "RevitFleet"
+    "Name": "RevitFleet",
+    "VpcConfig": {
+     "SubnetIds": [
+      {
+       "Ref": "AppStreamVPCPublicSubnet1Subnet6540BBB4"
+      },
+      {
+       "Ref": "AppStreamVPCPublicSubnet2Subnet5EA61DC3"
+      }
+     ]
+    }
    },
    "Metadata": {
     "aws:cdk:path": "AppStreamRevitStack/RevitFleet"
@@ -154,7 +582,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zWMwQqDMBBEv8V73Gp68doKvbbYDyhpjLAaE3E3lRLy70VDT/NmGJ6EuqmhKtRGpe6n0uIb4pOVnoTa6BXpDPEa9GRYtIPLlASqGWLnrdnHIx/eov7uNVMSalmIV7M/28HdrMmK7P7DMV+IvEbF6F1KojPkw6oP9T3wEjgJ53sDI50+soK6AVmMhFiuwTHOBrqcP3vL+SbLAAAA"
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/02QwW7CMBBEv4W745Jw4UqjtuJSrFBxrTZmESaOHdlroiryv1exKelpnkfj0e5WvNyWfL2C0Rfy3BVatXw6EsiOwei/J5QVn06DZPXFnETNRGi1ksfQGqTZW6ixgfALWo2Lv3g7761UQMqaZ3iGt72Y5RPoAwhH+GHCqTsQLsV7Q+gMPgN5ksdrRwTy2qOhyPyGT69BdvlbpsgU9HxqbB4rqbBaydSTKTIYBk8O52R9Me8aH8ulO/xBsv/tESNr0NvgZKo+BBoCRWbsGfnNv9yrNS+3vFrdvFKFC4ZUj7zJ+gsFWT5udwEAAA=="
    },
    "Metadata": {
     "aws:cdk:path": "AppStreamRevitStack/CDKMetadata/Default"
@@ -176,6 +604,12 @@
      "AppStreamFleetRole75D6353E",
      "Arn"
     ]
+   }
+  },
+  "VPCId": {
+   "Description": "The ID of the created VPC",
+   "Value": {
+    "Ref": "AppStreamVPC7F4B2A29"
    }
   }
  },

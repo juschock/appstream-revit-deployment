@@ -3,6 +3,7 @@ import { Construct } from 'constructs';
 import * as appstream from 'aws-cdk-lib/aws-appstream';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
 
 export class AppStreamStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -15,6 +16,11 @@ export class AppStreamStack extends cdk.Stack {
     if (!imageArn) {
       throw new Error("Error: You must provide an AppStream image ARN in cdk.json");
     }
+
+    const vpc = new ec2.Vpc(this, 'AppStreamVPC', {
+      maxAzs: 2,
+      natGateways: 1,
+    });
 
     const persistentStorageBucket = new s3.Bucket(this, 'PersistentStorageBucket', {
       removalPolicy: cdk.RemovalPolicy.RETAIN,
@@ -32,6 +38,9 @@ export class AppStreamStack extends cdk.Stack {
       name: 'RevitFleet',
       instanceType: fleetInstanceType,
       imageArn: imageArn,
+      vpcConfig: {
+        subnetIds: vpc.selectSubnets({ subnetType: ec2.SubnetType.PUBLIC }).subnetIds,
+      },
       computeCapacity: {
         desiredInstances: desiredInstances
       },
@@ -79,6 +88,11 @@ export class AppStreamStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'AppStreamFleetRoleArn', {
       value: fleetRole.roleArn,
       description: 'IAM Role ARN for AppStream Fleet'
+    });
+
+    new cdk.CfnOutput(this, 'VPCId', {
+      value: vpc.vpcId,
+      description: 'The ID of the created VPC'
     });
   }
 }

@@ -1,7 +1,7 @@
 {
   "version": "39.0.0",
   "files": {
-    "fa3e879ad1995f343c435e16ac5821e6125b9be91d359c16838cf937de333064": {
+    "49a1889f842f1dfa3543d592c74da869419a6a41d1e543b116981aee8b875b34": {
       "source": {
         "path": "AppStreamRevitStack.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "fa3e879ad1995f343c435e16ac5821e6125b9be91d359c16838cf937de333064.json",
+          "objectKey": "49a1889f842f1dfa3543d592c74da869419a6a41d1e543b116981aee8b875b34.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

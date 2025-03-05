@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/fa3e879ad1995f343c435e16ac5821e6125b9be91d359c16838cf937de333064.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/49a1889f842f1dfa3543d592c74da869419a6a41d1e543b116981aee8b875b34.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -34,6 +34,132 @@
         "AppStreamRevitStack.assets"
       ],
       "metadata": {
+        "/AppStreamRevitStack/AppStreamVPC/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPC7F4B2A29"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPublicSubnet1Subnet6540BBB4"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPublicSubnet1RouteTable59CFB7DC"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPublicSubnet1RouteTableAssociationFD5E631A"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPublicSubnet1DefaultRoute11C0B031"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPublicSubnet1EIP35A91E59"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPublicSubnet1NATGatewayD565B004"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPublicSubnet2Subnet5EA61DC3"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPublicSubnet2RouteTable966B13BF"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPublicSubnet2RouteTableAssociationC38F634B"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPublicSubnet2DefaultRouteE0DD11E4"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPrivateSubnet1SubnetE4C27DD4"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPrivateSubnet1RouteTable12D18701"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPrivateSubnet1RouteTableAssociationAF46A791"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPrivateSubnet1DefaultRoute6DBA8702"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPrivateSubnet2SubnetC678EC9D"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPrivateSubnet2RouteTable2F8F00A0"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPrivateSubnet2RouteTableAssociationEAD7AC98"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCPrivateSubnet2DefaultRouteDFE35ECC"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCIGW371CAD85"
+          }
+        ],
+        "/AppStreamRevitStack/AppStreamVPC/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AppStreamVPCVPCGW947385C3"
+          }
+        ],
         "/AppStreamRevitStack/PersistentStorageBucket/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -80,6 +206,12 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "AppStreamFleetRoleArn"
+          }
+        ],
+        "/AppStreamRevitStack/VPCId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VPCId"
           }
         ],
         "/AppStreamRevitStack/CDKMetadata/Default": [
